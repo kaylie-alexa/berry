@@ -40,23 +40,34 @@ async function setupWorkspaces(path) {
     },
     workspaces: [`packages/*`],
     dependencies: {
-      [`workspace-a`]: `workspace:*`
+      [`workspace-a`]: `workspace:*`,
     }
   });
 
   await writeJson(`${path}/packages/workspace-c/packages/workspace-d/package.json`, {
     name: `workspace-d`,
     version: `1.0.0`,
+    workspaces: [`packages/*`],
     scripts: {
       print: `echo Test Workspace D`,
-    }
+    },
+    [`workspace-a`]: `workspace:*`,
+    [`workspace-e`]: `workspace:*`,
   });
 
-  await writeJson(`${path}/packages/workspace-c/packages/workspace-e/package.json`, {
+  await writeJson(`${path}/packages/workspace-c/packages/workspace-d/packages/workspace-e/package.json`, {
     name: `workspace-e`,
     version: `1.0.0`,
     scripts: {
       print: `echo Test Workspace E`,
+    }
+  });
+
+  await writeJson(`${path}/packages/workspace-c/packages/workspace-f/package.json`, {
+    name: `workspace-f`,
+    version: `1.0.0`,
+    scripts: {
+      print: `echo Test Workspace F`,
     }
   });
 }
